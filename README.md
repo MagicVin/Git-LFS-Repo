@@ -89,7 +89,7 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 <h1>简单实践</h1>
 
 	1.Install Git Large File Storge:
-	<br>Go https://git-lfs.github.com/
+	Go https://git-lfs.github.com/
 	
 	2.tar -zvf git-lfs-linux-amd64-2.2.1.tar.gz
 	
