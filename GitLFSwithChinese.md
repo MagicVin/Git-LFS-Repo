@@ -17,17 +17,15 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 <h2>3.使用LFS：高效的大文件处理</h2> 
 	<p>当然，LFS不能简单地“消除”所有的大数据：它随着每一个变化而累积，必须被保存。 然而，它将这种负担转移到远程服务器 - 允许本地存储库保持相对精简！</p>
 	<p>为了实现这一点，LFS使用一个简单的技巧：它不会将所有文件的版本保留在本地存储库中。 相反，它只提供在检出版本中必要的文件。</p>
-	<p>但是这提出了一个有趣的问题：如果这些巨大的文件本身不存在于你的本地存储库...什么是现在？<br> LFS保存轻量级指针代替真实的文件数据。 当您使用这样的指针检查修订版本时，<br>LFS只需查找原始文件（可能在服务器上，如果它不在自己的特殊缓存中），并为您下载。</p>
+	<p>但是这提出了一个有趣的问题：如果这些巨大的文件本身不存在于你的本地存储库...什么是现在？LFS保存轻量级指针代替真实的文件数据。 当您使用这样的指针检查修订版本时，LFS只需查找原始文件（可能在服务器上，如果它不在自己的特殊缓存中），并为您下载。</p>
 	<p>因此，您只能得到您真正想要的文件，而不是您可能永远不需要的一大堆多余的数据。</p>
 
 <h2>4.安装LFS</h2>
 	<p>LFS不是核心Git二进制文件的一部分，但它可作为扩展。 这意味着，在我们可以使用LFS之前，我们需要确保安装。</p>
-	<h4>服务器</h4>
+<h4>服务器</h4>
 	<p>并非所有代码托管服务都支持LFS。 然而，作为GitLab用户，没有什么可担心的：如果您使用GitLab.com或最近版本的GitLab CE或EE，则对LFS的支持已经被烘烤了！ 您的管理员只需要启用LFS选项。</p>
-
-	<h4>本地机</h4>
+<h4>本地机</h4>
 	<p>您当地的Git安装也需要支持LFS。 如果您正在使用Tower，Git桌面客户端，则无需安装任何内容：Tower支持Git Large File System（开箱即用）。
-
 	<p>如果您在命令行中使用Git，则可以使用不同的安装选项：</p>
 
 	 二进制包：最新的二进制包可用于Windows，Mac，Linux和FreeBSD。
@@ -44,12 +42,10 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 	<p>所以让我们回到我们的“大Photoshop文件”的例子。<br> 我们可以指示LFS使用“lfs track”命令来处理“design.psd”文件：</p>
 
 		git lfs track "design-resources/design.psd"
-
 	<p>乍一看，这个命令似乎没有太大的影响。<br> 但是，您会注意到，项目根文件夹中的新文件已创建（或已更改，如果已存在）：</br>.gitattributes收集我们选择通过LFS进行跟踪的所有文件模式。<br> 我们来看看它的内容：</p>	
 
 		cat .gitattributes 
 		design-resources/design.psd filter=lfs diff=lfs merge=lfs -text
-	
 	<p> 完美！ 从现在开始，LFS将处理此文件。 我们现在可以按照我们习惯的方式将其添加到存储库中。<br> 请注意，对.gitattributes的任何更改也必须提交到存储库，就像其他修改一样：</p>
 
 		git add .gitattributes
@@ -61,7 +57,6 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 例如，以下命令将指示LFS跟踪所有InDesign文件 - 现有的和未来的文件：
 		
 		git lfs track "*.indd"
-
 	<p>你也可以告诉LFS跟踪整个目录的内容：</p>
 
 		git lfs track "design-assets/*"
