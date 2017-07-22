@@ -7,11 +7,11 @@
 	<p>但是，当然，没有使用版本控制来设计/概念/电影/音频/可执行文件/ <other-large-file-use-case>工作不能成为解决方案。 版本控制的一般好处仍然适用，应该在各种项目中获得。</p>
 	<p>幸运的是，有一个Git扩展，使大型文件的工作效率更高：对“大文件存储”（或简称“LFS”，如果你喜欢昵称）打个招呼。</p>
 <h2>2.没有LFS：膨胀的存储库</h2>
-	<p>在我们看看LFS如何运作奇迹之前，我们将仔细研究一下实际的问题。<br>我们以简单的网站项目为例：</br>
+	<p>在我们看看LFS如何运作奇迹之前，我们将仔细研究一下实际的问题。我们以简单的网站项目为例：<br>
 https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial/project-setup-without-big-files.png</p> 
-	<p>没什么特别的:一些HTML，CSS和JS文件以及一些小图像资源。 不过，到目前为止，我们还没有包括我们的设计资产（Photoshop，Sketch等）。<br> 将您的设计资产置于版本控制之下也是很有意义的。<br>
+	<p>没什么特别的:一些HTML，CSS和JS文件以及一些小图像资源。 不过，到目前为止，我们还没有包括我们的设计资产（Photoshop，Sketch等）。将您的设计资产置于版本控制之下也是很有意义的。<br>
 https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial/project-setup-with-big-files.png</p>
-	<p>但是，这是一个catch：每当我们的设计师对这个新的Photoshop文件做出改变（无<br>论多么小）时，她将向存储库再提交一百MB。</br> 很快，存储库将重达千兆字节和很快的千兆字节，这使得克隆和管理非常繁琐。</p>
+	<p>但是，这是一个catch：每当我们的设计师对这个新的Photoshop文件做出改变（无论多么小）时，她将向存储库再提交一百MB。很快，存储库将重达千兆字节和很快的千兆字节，这使得克隆和管理非常繁琐。</p>
 	<p>虽然我只是谈到“设计”文件，但这真的是所有“大”文件的问题：电影，录音，数据集等。</p>
 
 <h2>3.使用LFS：高效的大文件处理</h2> 
@@ -34,9 +34,9 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
      Windows：您可以通过“choco install git-lfs”使用Chocolatey包管理器。
 <p>在您的包管理器完成工作后，您需要使用“lfs install”命令完成安装：</p>
 
-		git lfs install
+	git lfs install
 
-<h2>使用LFS跟踪文件</h2>
+<h2>5.使用LFS跟踪文件</h2>
 	<p>没有进一步的说明，LFS将不会处理您的大文件问题。 我们必须明确告诉LFS应该处理哪些文件！</p>
 	<p>所以让我们回到我们的“大Photoshop文件”的例子。<br> 我们可以指示LFS使用“lfs track”命令来处理“design.psd”文件：
 	
@@ -51,7 +51,7 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 	git add design-resources/design.psd
 	git commit -m "Add design file"
 
-<h2>跟踪文件模式</h2>
+<h2>6.跟踪文件模式</h2>
 	<p>添加这样一个特定的单个文件是很好的，但是如果要跟踪我们项目中的每个.indd文件，该怎么办？ 请放心：您不必手动添加每个文件！ LFS允许您定义文件模式，就像忽略文件一样。</p> 
 例如，以下命令将指示LFS跟踪所有InDesign文件 - 现有的和未来的文件：
 		
@@ -60,28 +60,28 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 
 	git lfs track "design-assets/*"
 
-<h2>获取跟踪文件概述</h2>
+<h2>7.获取跟踪文件概述</h2>
 	<p>在某些时候，您可能想知道目前LFS跟踪哪些文件。 你可以简单的看看.gitattributes文件。 然而，这些不是实际的文件，而只是规则，因此高度“理论”：个别文件可能已经滑过，例如。 由于打字错误或过度限制的规则。
 	要查看您当前正在跟踪的实际文件的列表，只需使用git lfs ls-files命令：</p>
 	
 	git lfs ls-files
 	194dcdb603 * design-resources/design.psd
 
-<h2>跟踪尽可能的早</h2>
+<h2>8.跟踪尽可能的早</h2>
 	<p> 请记住，LFS不会改变自然规律：提交到存储库的事情在那里停留。 更改项目的提交历史是非常困难的（而且是危险的）。</p>
 	<p>这意味着您应该告诉LFS在提交到存储库之前跟踪文件。</p>
 	<p>否则，它已经成为您项目历史的一部分 - 包括所有的兆字节和千兆字节...
 	<br>初始化存储库（就像忽略文件）一样，配置要跟踪哪些文件模式的理想时刻是正确的。</br></p>
 
-<h2>在GUI中使用LFS</h2>
-	<p>虽然LFS不难使用，但仍有命令需要记住和事情搞砸。如果你希望使用Git（和LFS）更有效率，请查看Tower，这是用于Mac和Windows的Git桌面客户端。 由于Tower内置了对Git LFS的支持，因此无需安装。 该应用程序已经存在了好几年，并被全球超过8万名用户信赖。</p>
+<h2>9.在GUI中使用LFS</h2>
+	<p>虽然LFS不难使用，但仍有命令需要记住和事情搞砸。如果你希望使用Git（和LFS）更有效率，请查看Tower，这是用于Mac和Windows的Git桌面客户端。 由于Tower内置了对Git LFS的支持，因此无需安装。 该应用程序已经存在了好几年，并被全球超过8万名用户信赖。<br>https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial/tower-lfs.gif </p>
 	<p>此外，Tower提供与GitLab的直接集成！ 在塔中连接您的GitLab帐户后，只需单击鼠标即可克隆和创建存储库。</p>
 
-<h2>用Git工作</h2>
+<h2>10.用Git工作</h2>
 	<p>LFS的一个重要方面是，您可以保持正常的Git工作流程：分段，提交，推送，拉动以及其他一切工作原理。 除了我们讨论过的命令外，没有什么值得注意的。</p>
 	<p>当您需要时，LFS将提供您需要的文件。</p>
 	<p>如果您正在寻找有关LFS的更多信息，请查看此免费在线图书。 有关Git的一般见解，请查看Git Tips＆Tricks博客文章和Tower的视频系列。</p>
 
-<h2>关于访客作者</h2>
+<h2>11.关于访客作者</h2>
 	<p>这是由TobiasGünther撰写的客座讲话，他是Tower Git客户背后的团队的一部分。</p>
 	<p>封面图片：Git LFS的屏幕截图</p>
