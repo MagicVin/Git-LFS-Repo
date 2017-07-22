@@ -87,7 +87,8 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 	<p>封面图片：Git LFS的屏幕截图</p>
 
 <h1>简单实践</h1>
-<p>1.Install Git Large File Storge:
+
+	1.Install Git Large File Storge:
 	<br>Go https://git-lfs.github.com/
 	
 	2.tar -zvf git-lfs-linux-amd64-2.2.1.tar.gz
@@ -103,4 +104,4 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 	7.git commit -m "add test.tar.gz"
 	
 	8.git push origin master
-</p>
+
