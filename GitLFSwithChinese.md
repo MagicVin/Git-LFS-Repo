@@ -31,8 +31,8 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 	 二进制包：最新的二进制包可用于Windows，Mac，Linux和FreeBSD。
      Linux：可从PackageCloud获得Debian和RPM软件包。
      macOS：您可以通过“brew install git-lfs”或MacPorts通过“port install git-lfs”使用Homebrew。
-     Windows：您可以通过“choco install git-lfs”使用Chocolatey包管理器。</p>
-	<p>在您的包管理器完成工作后，您需要使用“lfs install”命令完成安装：</p>
+     Windows：您可以通过“choco install git-lfs”使用Chocolatey包管理器。
+<p>在您的包管理器完成工作后，您需要使用“lfs install”命令完成安装：</p>
 
 		git lfs install
 
@@ -43,29 +43,29 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 	git lfs track "design-resources/design.psd"
 <p>乍一看，这个命令似乎没有太大的影响。 但是，您会注意到，项目根文件夹中的新文件已创建（或已更改，如果已存在）：.gitattributes收集我们选择通过LFS进行跟踪的所有文件模式。我们来看看它的内容：</p>	
 
-		cat .gitattributes 
-		design-resources/design.psd filter=lfs diff=lfs merge=lfs -text
+	cat .gitattributes 
+	design-resources/design.psd filter=lfs diff=lfs merge=lfs -text
 <p> 完美！ 从现在开始，LFS将处理此文件。 我们现在可以按照我们习惯的方式将其添加到存储库中。<br> 请注意，对.gitattributes的任何更改也必须提交到存储库，就像其他修改一样：</p>
 
-		git add .gitattributes
-		git add design-resources/design.psd
-		git commit -m "Add design file"
+	git add .gitattributes
+	git add design-resources/design.psd
+	git commit -m "Add design file"
 
 <h2>跟踪文件模式</h2>
 	<p>添加这样一个特定的单个文件是很好的，但是如果要跟踪我们项目中的每个.indd文件，该怎么办？ 请放心：您不必手动添加每个文件！ LFS允许您定义文件模式，就像忽略文件一样。</p> 
 例如，以下命令将指示LFS跟踪所有InDesign文件 - 现有的和未来的文件：
 		
-		git lfs track "*.indd"
+	git lfs track "*.indd"
 <p>你也可以告诉LFS跟踪整个目录的内容：</p>
 
-		git lfs track "design-assets/*"
+	git lfs track "design-assets/*"
 
 <h2>获取跟踪文件概述</h2>
 	<p>在某些时候，您可能想知道目前LFS跟踪哪些文件。 你可以简单的看看.gitattributes文件。 然而，这些不是实际的文件，而只是规则，因此高度“理论”：个别文件可能已经滑过，例如。 由于打字错误或过度限制的规则。
 	要查看您当前正在跟踪的实际文件的列表，只需使用git lfs ls-files命令：</p>
 	
-		git lfs ls-files
-		194dcdb603 * design-resources/design.psd
+	git lfs ls-files
+	194dcdb603 * design-resources/design.psd
 
 <h2>跟踪尽可能的早</h2>
 	<p> 请记住，LFS不会改变自然规律：提交到存储库的事情在那里停留。 更改项目的提交历史是非常困难的（而且是危险的）。</p>
