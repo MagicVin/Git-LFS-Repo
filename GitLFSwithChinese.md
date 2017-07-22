@@ -1,5 +1,5 @@
-<a herf="https://about.gitlab.com/2017/01/30/getting-started-with-git-lfs-tutorial/"><h1>原文<h1></a>
-<h2>1.Git从Git LFS开始<h2>
+<a href="https://about.gitlab.com/2017/01/30/getting-started-with-git-lfs-tutorial/"target="_blank">原文</a>
+<h2>1.Git从Git LFS开始</h2>
 <p>	它以最好的意图发生：您的设计团队将他们的大型图形文件添加到您的项目存储库中 - 您可以看到它增长并增长，直到它成为一个多G字节的集群
 	在Git中使用大型二进制文件确实很棘手。 每次100 MB Photoshop文件中的微小更改都会被提交，您的存储库将再增加100 MB。 这很快就加起来了，由于其庞大的尺寸，使您的存储库几乎不可用。
 	但是，当然，没有使用版本控制来设计/概念/电影/音频/可执行文件/ <other-large-file-use-case>工作不能成为解决方案。 版本控制的一般好处仍然适用，应该在各种项目中获得。
@@ -43,21 +43,22 @@
 
 <h2>使用LFS跟踪文件</h2>
 	<p>没有进一步的说明，LFS将不会处理您的大文件问题。 我们必须明确告诉LFS应该处理哪些文件！</p>
-	<p>所以让我们回到我们的“大Photoshop文件”的例子。 我们可以指示LFS使用“lfs track”命令来处理“design.psd”文件：
+	<p>所以让我们回到我们的“大Photoshop文件”的例子。<br> 我们可以指示LFS使用“lfs track”命令来处理“design.psd”文件：</br>
 		git lfs track "design-resources/design.psd"</p>
 
-	<p> 乍一看，这个命令似乎没有太大的影响。 但是，您会注意到，项目根文件夹中的新文件已创建（或已更改，如果已存在）：.gitattributes收集我们选择通过LFS进行跟踪的所有文件模式。 我们来看看它的内容：	
+	<p>乍一看，这个命令似乎没有太大的影响。<br> 但是，您会注意到，项目根文件夹中的新文件已创建（或已更改，如果已存在）：</br>.gitattributes收集我们选择通过LFS进行跟踪的所有文件模式。 我们来看看它的内容：	
 		cat .gitattributes 
 		design-resources/design.psd filter=lfs diff=lfs merge=lfs -text</p>
 	
-	<p> 完美！ 从现在开始，LFS将处理此文件。 我们现在可以按照我们习惯的方式将其添加到存储库中。 请注意，对.gitattributes的任何更改也必须提交到存储库，就像其他修改一样：
+	<p> 完美！ 从现在开始，LFS将处理此文件。 我们现在可以按照我们习惯的方式将其添加到存储库中。 请注意，对.gitattributes的任何更改也必须提交到存储库，就像其他修改一样：</p>
 		git add .gitattributes
 		git add design-resources/design.psd
-		git commit -m "Add design file"</p>
+		git commit -m "Add design file"
 
 <h2>跟踪文件模式</h2>
-	<p>添加这样一个特定的单个文件是很好的，但是如果要跟踪我们项目中的每个.indd文件，该怎么办？ 请放心：您不必手动添加每个文件！ LFS允许您定义文件模式，就像忽略文件一样。 例如，以下命令将指示LFS跟踪所有InDesign文件 - 现有的和未来的文件：
-		git lfs track "*.indd"</p>
+	<p>添加这样一个特定的单个文件是很好的，但是如果要跟踪我们项目中的每个.indd文件，该怎么办？ 请放心：您不必手动添加每个文件！ LFS允许您定义文件模式，就像忽略文件一样。 例如，以下命令将指示LFS跟踪所有InDesign文件 - 现有的和未来的文件：</p>
+		
+		git lfs track "*.indd"
 
 	<p>你也可以告诉LFS跟踪整个目录的内容：
 		git lfs track "design-assets/*"</p>
