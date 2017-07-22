@@ -1,4 +1,4 @@
-<h1><a herf="https://about.gitlab.com/2017/01/30/getting-started-with-git-lfs-tutorial/">原文</a><h1>
+<a herf="https://about.gitlab.com/2017/01/30/getting-started-with-git-lfs-tutorial/"><h1>原文<h1></a>
 <h2>1.Git从Git LFS开始<h2>
 <p>	它以最好的意图发生：您的设计团队将他们的大型图形文件添加到您的项目存储库中 - 您可以看到它增长并增长，直到它成为一个多G字节的集群
 	在Git中使用大型二进制文件确实很棘手。 每次100 MB Photoshop文件中的微小更改都会被提交，您的存储库将再增加100 MB。 这很快就加起来了，由于其庞大的尺寸，使您的存储库几乎不可用。
