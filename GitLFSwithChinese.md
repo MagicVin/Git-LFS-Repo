@@ -32,21 +32,20 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
      Linux：可从PackageCloud获得Debian和RPM软件包。
      macOS：您可以通过“brew install git-lfs”或MacPorts通过“port install git-lfs”使用Homebrew。
      Windows：您可以通过“choco install git-lfs”使用Chocolatey包管理器。</p>
-	
 	<p>在您的包管理器完成工作后，您需要使用“lfs install”命令完成安装：</p>
 
 		git lfs install
 
 <h2>使用LFS跟踪文件</h2>
 	<p>没有进一步的说明，LFS将不会处理您的大文件问题。 我们必须明确告诉LFS应该处理哪些文件！</p>
-	<p>所以让我们回到我们的“大Photoshop文件”的例子。<br> 我们可以指示LFS使用“lfs track”命令来处理“design.psd”文件：</p>
-
-		git lfs track "design-resources/design.psd"
-	<p>乍一看，这个命令似乎没有太大的影响。<br> 但是，您会注意到，项目根文件夹中的新文件已创建（或已更改，如果已存在）：</br>.gitattributes收集我们选择通过LFS进行跟踪的所有文件模式。<br> 我们来看看它的内容：</p>	
+	<p>所以让我们回到我们的“大Photoshop文件”的例子。<br> 我们可以指示LFS使用“lfs track”命令来处理“design.psd”文件：
+	
+	git lfs track "design-resources/design.psd"
+<p>乍一看，这个命令似乎没有太大的影响。 但是，您会注意到，项目根文件夹中的新文件已创建（或已更改，如果已存在）：.gitattributes收集我们选择通过LFS进行跟踪的所有文件模式。我们来看看它的内容：</p>	
 
 		cat .gitattributes 
 		design-resources/design.psd filter=lfs diff=lfs merge=lfs -text
-	<p> 完美！ 从现在开始，LFS将处理此文件。 我们现在可以按照我们习惯的方式将其添加到存储库中。<br> 请注意，对.gitattributes的任何更改也必须提交到存储库，就像其他修改一样：</p>
+<p> 完美！ 从现在开始，LFS将处理此文件。 我们现在可以按照我们习惯的方式将其添加到存储库中。<br> 请注意，对.gitattributes的任何更改也必须提交到存储库，就像其他修改一样：</p>
 
 		git add .gitattributes
 		git add design-resources/design.psd
@@ -57,7 +56,7 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 例如，以下命令将指示LFS跟踪所有InDesign文件 - 现有的和未来的文件：
 		
 		git lfs track "*.indd"
-	<p>你也可以告诉LFS跟踪整个目录的内容：</p>
+<p>你也可以告诉LFS跟踪整个目录的内容：</p>
 
 		git lfs track "design-assets/*"
 
