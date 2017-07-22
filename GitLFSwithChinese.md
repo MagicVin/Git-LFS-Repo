@@ -105,3 +105,15 @@ https://about.gitlab.com/images/blogimages/getting-started-with-git-lfs-tutorial
 	
 	8.git push origin master
 
+-------------------------------------------------------------------------------
+|	1 file changed, 3 insertions(+), 2 deletions(-)					           |
+|	Counting objects: 3, done.												   |	
+|	Delta compression using up to 8 threads.								   |	
+|	Compressing objects: 100% (3/3), done.									   |
+|	Writing objects: 100% (3/3), 311 bytes | 0 bytes/s, done.				   |
+|	Total 3 (delta 2), reused 0 (delta 0)									   |
+|	remote: Resolving deltas: 100% (2/2), completed with 2 local objects.	   |
+|	To https://github.com/MagicVin/Git-LFS-Repo.git							   |
+|	bbbb835..1b12e63  master -> master										   |
+|	GitLFSwithChinese.md push successed!									   |
+-------------------------------------------------------------------------------
